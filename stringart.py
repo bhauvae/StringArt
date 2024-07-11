@@ -95,9 +95,7 @@ def get_strings(img_path):  # using max
             len_of_proj = 2 * ((radius**2 - s**2) ** 0.5)
             len_adj_sinogram[s] = sinogram_img[s, :] / len_of_proj
 
-        max_index = np.unravel_index(
-            np.argmax(len_adj_sinogram), len_adj_sinogram.shape
-        )
+        max_index = np.argmax(len_adj_sinogram)
         s_idx, theta_idx = max_index
 
         alpha = theta[theta_idx]
@@ -164,10 +162,10 @@ def create_string_art(strings):
 
 
 # art = create_string_art([tuple(np.random.uniform(0, 360, size=2)) for _ in range(300)])
-# art = create_string_art(get_strings("circle.png"))
-np.save('strings',greedy_solve('circle.png'))
+art = create_string_art(get_strings("circle.png"))
+
 # Save and display the result
-# cv2.imwrite("art.png", art)
-# cv2.imshow("Canvas", art)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+cv2.imwrite("art.png", art)
+cv2.imshow("Canvas", art)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

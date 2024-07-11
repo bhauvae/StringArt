@@ -1,12 +1,7 @@
+
+import cv2
 import numpy as np
+from skimage.transform import radon
 
-
-
-# Example matrices A and B
-A = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]], [[2, 3, 4], [5, 6, 7], [8, 9, 10]]])
-
-B = np.array([[3, 5, 7], [6, 8, 10]])
-
-# Solve for x using the greedy search algorithm
-
-print(A[:,:,0])
+img = cv2.imread('circle.png', cv2.IMREAD_GRAYSCALE)
+print(img.shape)
