@@ -4,7 +4,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 
-def crop_image_to_circle(image_path, output_path, max_length=1920):
+def crop_image_to_circle(image_path, output_path, max_length=3840):
     # Read the input image
     image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
 
@@ -98,6 +98,9 @@ def get_strings(img_path, num_of_anchors):  # using max
     # Load and convert the image to grayscale
     image = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
 
+    # Convert to negative image by subtracting from 255
+    image = 255 - image
+
     height, width = image.shape
     center = (width // 2, height // 2)
     radius = min(center[0], center[1])
@@ -142,6 +145,8 @@ def get_strings(img_path, num_of_anchors):  # using max
 
         print(f"String {len(strings)}: {theta1} to {theta2}")
 
+    plot_sinogram(sinogram_img)
+
     return strings, radius
 
 
@@ -164,14 +169,15 @@ def create_string_art(strings, radius):
     return canvas
 
 
-# crop_image_to_circle("test.jpg", "test.png")
+crop_image_to_circle("test.jpg", "test.png")
 # art = create_string_art(
 #     [tuple(np.random.uniform(0, 360, size=2)) for _ in range(500)], 1278 // 2
 # )
-art = create_string_art(get_strings("test.png", 500))
+strings, radius = get_strings("test.png", 900)
+art = create_string_art(strings, radius)
 # # plot_sinogram(radon_string(128, 90, 256))
 # # Save and display the result
-cv2.imwrite("test_500.png", art)
+cv2.imwrite("test_900.png", art)
 # cv2.imshow("Canvas", art)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()

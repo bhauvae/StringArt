@@ -168,10 +168,12 @@ def create_string_art(strings, radius):
 # art = create_string_art(
 #     [tuple(np.random.uniform(0, 360, size=2)) for _ in range(500)], 1278 // 2
 # )
-art = create_string_art(get_strings("test.png", 1000))
+strings, radius = get_strings("test.png", 600)
+art = create_string_art(strings, radius)
+
 # # plot_sinogram(radon_string(128, 90, 256))
 # # Save and display the result
-cv2.imwrite("test_1000.png", art)
+cv2.imwrite("test_600.png", art)
 # cv2.imshow("Canvas", art)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
