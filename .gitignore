@@ -1,4 +1,6 @@
 *.npy
 .venv
+.vscode
+__pycache__
 Library
 info
